@@ -52,9 +52,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center', // Asigură că elementele sunt vizibile
-    backgroundColor: 'white', // Fundal alb
-    width: '100%', // Evită probleme cu layout-ul
+    padding: 20,
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 24,
@@ -69,7 +68,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingLeft: 10,
     borderRadius: 5,
-    width: '100%', // Asigură că inputurile sunt responsabile
   },
 });
 
