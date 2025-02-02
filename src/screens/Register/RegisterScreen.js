@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const RegisterScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const handleRegister = () => {
-    // Aici poți adăuga validarea câmpurilor sau trimite datele la un backend
-    if (name && email && password) {
-      Alert.alert('Succes', 'Te-ai înregistrat cu succes!');
-      // Poți adăuga logica pentru trimiterea datelor la un server sau la un backend
-    } else {
-      Alert.alert('Eroare', 'Completează toate câmpurile!');
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      Alert.alert('Eroare', 'All fields are required!');
+      return;
     }
+    Alert.alert('Succes', 'You have successfully registered!');
+    navigation.navigate('Login');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Înregistrare</Text>
+      <Text style={styles.title}>RegisterScreen</Text>
 
       <TextInput
         style={styles.input}
-        placeholder="Nume"
+        placeholder="Name"
+        placeholderTextColor="#888"
         value={name}
         onChangeText={setName}
       />
@@ -30,6 +32,7 @@ const RegisterScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor="#888"
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
@@ -37,13 +40,16 @@ const RegisterScreen = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Parolă"
+        placeholder="Password"
+        placeholderTextColor="#888"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
 
-      <Button title="Înregistrează-te" onPress={handleRegister} />
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
+        <Text style={styles.buttonText}>Sign up</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -52,22 +58,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#f0f4f8',
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 20,
-    textAlign: 'center',
+    color: '#333',
   },
   input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
+    width: '100%',
+    height: 50,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    paddingLeft: 15,
     marginBottom: 15,
-    paddingLeft: 10,
-    borderRadius: 5,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#ccc',
+  },
+  button: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#4A90E2',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 

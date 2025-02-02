@@ -1,13 +1,16 @@
-import React from 'react';
-import { SafeAreaView } from 'react-native';
-import RegisterScreen from './src/screens/Register/RegisterScreen.js';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import RegisterScreen from "/Users/sebastianmarius/Desktop/Reactify/src/screens/Register/RegisterScreen.js"; // Importă corect ecranul
 
-const App = () => {
+const Stack = createStackNavigator();
+
+export default function App() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <RegisterScreen />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Register" component={RegisterScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-export default App;
+}
